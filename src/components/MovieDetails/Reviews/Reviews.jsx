@@ -28,13 +28,12 @@ const Reviews = () => {
 
   return (
     <>
-      <ReviewHeader>Review</ReviewHeader>
+      {error ? <div>An error occurred, please try again later...</div> : null}
+      {isLoading ? <Loader /> : null}
       {reviews.length ? (
         <div>
-          {error ? (
-            <div>An error occurred, please try again later...</div>
-          ) : null}
-          {isLoading ? <Loader /> : null}
+          <ReviewHeader>Review</ReviewHeader>
+
           {reviews.map(review => {
             return (
               <>

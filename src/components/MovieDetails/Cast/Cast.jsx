@@ -28,37 +28,37 @@ const Cast = () => {
 
   return (
     <>
-      <CastHeader>Cast</CastHeader>
-
+      {error ? <div>An error occurred, please try again later...</div> : null}
+      {isLoading ? <Loader /> : null}
       {cast.length ? (
-        <CastWrapper>
-          {error ? (
-            <div>An error occurred, please try again later...</div>
-          ) : null}
-          {isLoading ? <Loader /> : null}
-          {cast.map(actor => {
-            return (
-              <ActorCard key={actor.credit_id}>
-                {actor.profile_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-                    alt={`${actor.name}`}
-                  />
-                ) : (
-                  <img
-                    src={`https://i.stack.imgur.com/q89AO.jpg`}
-                    alt={`${actor.name} profile`}
-                    width={'200px'}
-                  />
-                )}
-                <ActorInfo>
-                  <h4> {actor.name}</h4>
-                  <p>Character: {actor.character}</p>
-                </ActorInfo>
-              </ActorCard>
-            );
-          })}{' '}
-        </CastWrapper>
+        <div>
+          <CastHeader>Cast</CastHeader>
+
+          <CastWrapper>
+            {cast.map(actor => {
+              return (
+                <ActorCard key={actor.credit_id}>
+                  {actor.profile_path ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+                      alt={`${actor.name}`}
+                    />
+                  ) : (
+                    <img
+                      src={`https://i.stack.imgur.com/q89AO.jpg`}
+                      alt={`${actor.name} profile`}
+                      width={'200px'}
+                    />
+                  )}
+                  <ActorInfo>
+                    <h4> {actor.name}</h4>
+                    <p>Character: {actor.character}</p>
+                  </ActorInfo>
+                </ActorCard>
+              );
+            })}{' '}
+          </CastWrapper>
+        </div>
       ) : (
         <h3>We don't have any information about the cast yet.</h3>
       )}

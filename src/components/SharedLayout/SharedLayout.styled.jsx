@@ -10,7 +10,7 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 20px 40px;
+  padding: 20px 76px;
   top: 0;
   left: 0;
   position: sticky;
