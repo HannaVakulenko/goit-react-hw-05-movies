@@ -6,15 +6,15 @@ export const StyledLink = styled(NavLink)`
   align-items: center;
   padding: 8px 16px;
   border-radius: 4px;
-  color: ${props => props.theme.colors.white};
+  color: ${props => props.theme.colors.accent};
   text-decoration: none;
   font-weight: 500;
   text-transform: uppercase;
-  background: ${props => props.theme.colors.gradientOrange};
+  background: ${props => props.theme.colors.white};
   :hover,
   :focus {
-    background: ${props => props.theme.colors.white};
-    color: ${props => props.theme.colors.accent};
+    background: ${props => props.theme.colors.gradientOrange};
+    color: ${props => props.theme.colors.white};
   }
 `;
 

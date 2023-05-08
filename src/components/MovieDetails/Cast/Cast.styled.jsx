@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const CastHeader = styled.h3`
+  font-size: ${props => props.theme.fontSizes.l};
+  font-weight: ${props => props.theme.fontWeights.medium};
+  text-align: center;
+  margin-bottom: 24px;
+`;
+
 export const CastWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;

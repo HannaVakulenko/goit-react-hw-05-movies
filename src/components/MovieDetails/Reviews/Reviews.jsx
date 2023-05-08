@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from 'services/tmdbAPI';
-import { ReviewWrapper } from './Reviews.styled';
+import { ReviewWrapper, ReviewHeader } from './Reviews.styled';
 import { Loader } from 'components/Loader/Loader';
 
 const Reviews = () => {
   const { movieId } = useParams();
-  const [movieReviews, setMovieReviews] = useState({});
+  const [reviews, setReviews] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -15,8 +15,8 @@ const Reviews = () => {
       try {
         setError(false);
         setIsLoading(true);
-        const fetchedReviews = await fetchMovieReviews(movieId);
-        setMovieReviews(fetchedReviews);
+        const { results } = await fetchMovieReviews(movieId);
+        setReviews(results);
       } catch (error) {
         setError(true);
       } finally {
@@ -27,19 +27,29 @@ const Reviews = () => {
   }, [movieId]);
 
   return (
-    <div>
-      {error ? <div>An error occurred, please try again later...</div> : null}
-      {isLoading ? <Loader /> : null}
-
-      {movieReviews.results?.map(review => {
-        return (
-          <ReviewWrapper key={review.id}>
-            <h3>Author: {review.author}</h3>
-            <p>{review.content}</p>
-          </ReviewWrapper>
-        );
-      })}
-    </div>
+    <>
+      <ReviewHeader>Review</ReviewHeader>
+      {reviews.length ? (
+        <div>
+          {error ? (
+            <div>An error occurred, please try again later...</div>
+          ) : null}
+          {isLoading ? <Loader /> : null}
+          {reviews.map(review => {
+            return (
+              <>
+                <ReviewWrapper key={review.id}>
+                  <h3>Author: {review.author}</h3>
+                  <p>{review.content}</p>
+                </ReviewWrapper>
+              </>
+            );
+          })}
+        </div>
+      ) : (
+        <h3>We don't have any reviews for this movie yet.</h3>
+      )}
+    </>
   );
 };
 
